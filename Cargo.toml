@@ -2,6 +2,12 @@
 name = "p0f-rs"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "Rust library to interact with the p0f api using the unix socket"
+repository = "https://github.com/veronoicc/p0f-rs"
+keywords = ["p0f", "network", "security", "fingerprinting"]
+categories = ["api-bindings"]
+authors = ["Vero <rust@veronoi.cc>"]
 
 [features]
 serde = ["dep:serde"]
