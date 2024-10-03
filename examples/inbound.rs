@@ -1,8 +1,12 @@
-use std::{net::{SocketAddr, TcpListener}, str::FromStr as _, thread, time::Duration};
+use std::{
+    net::{SocketAddr, TcpListener},
+    str::FromStr as _,
+    thread,
+    time::Duration,
+};
 
 use clap::Parser;
 use p0f_rs::P0f;
-
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -11,7 +15,7 @@ struct Args {
     address: String,
 
     #[arg(short, long)]
-    socket: String
+    socket: String,
 }
 
 fn main() -> eyre::Result<()> {
