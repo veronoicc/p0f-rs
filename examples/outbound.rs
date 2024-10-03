@@ -7,6 +7,7 @@ use p0f_rs::P0f;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
+    // This default ip is for tcpbin.com
     #[arg(short, long, default_value = "45.79.112.203:4242")]
     address: String,
 
