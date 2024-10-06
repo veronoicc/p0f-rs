@@ -1,6 +1,6 @@
 [package]
 name = "p0f-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 description = "Rust library to interact with the p0f api using the unix socket"
