@@ -14,7 +14,10 @@ const REQUEST_MAGIC: u32 = 0x50304601;
 const RESPONSE_MAGIC: u32 = 0x50304602;
 
 const REQUEST_SIZE: usize = 21;
+#[cfg(not(feature = "p0f-mtu"))]
 const RESPONSE_SIZE: usize = 232;
+#[cfg(feature = "p0f-mtu")]
+const RESPONSE_SIZE: usize = 234;
 
 const STR_MAX: usize = 31;
 const STR_SIZE: usize = STR_MAX + 1;
@@ -239,6 +242,13 @@ impl P0f {
             ),
         };
 
+        #[cfg(feature = "p0f-mtu")]
+        let link_mtu = u16::from_ne_bytes(
+            *response
+                .read_array()
+                .ok_or(Error::MissingData("mtu"))?,
+        );
+
         let link_type = match response.get_buffer()[0] {
             0 => None,
             _ => Some(
@@ -280,6 +290,8 @@ impl P0f {
             os_flavor,
             http_name,
             http_flavor,
+            #[cfg(feature = "p0f-mtu")]
+            link_mtu,
             link_type,
             language,
         }))
@@ -303,6 +315,8 @@ pub struct Response {
     pub os_flavor: Option<String>,
     pub http_name: Option<String>,
     pub http_flavor: Option<String>,
+    #[cfg(feature = "p0f-mtu")]
+    pub link_mtu: u16,
     pub link_type: Option<String>,
     pub language: Option<String>,
 }
